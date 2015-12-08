@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../FelpudoAR/Assets/RotateObject.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game Jam Menu Template/Scripts/SetAudioLevels.cs">
     <Files>
-      <File FileName="../FelpudoAR/Assets/RotateObject.cs" Line="13" Column="35" />
+      <File FileName="Assets/Game Jam Menu Template/Scripts/SetAudioLevels.cs" Line="1" Column="1" />
+      <File FileName="Assets/Game Jam Menu Template/Scripts/PlayMusic.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
