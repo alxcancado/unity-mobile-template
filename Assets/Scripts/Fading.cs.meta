@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 5a26f810e59414d78bb9c93aa66e34d2
-timeCreated: 1446001003
+timeCreated: 1455951222
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fadeOutTexture: {fileID: 2800000, guid: 40747249d36b14270bb92e8b57546beb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
