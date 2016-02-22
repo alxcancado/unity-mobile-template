@@ -5,13 +5,13 @@ public class Fading : MonoBehaviour {
 
 	public Texture2D 	fadeOutTexture; 	// texture that will overlay the screen. Can be a black img or loading graphic
 
-	public float 		fadeSpeed = 0.08f;	// fading speed
+	public float 		fadeSpeed = 0.2f;	// fading speed
 
 	private int			drawDepth = -1000;	// order in draw hierarchy. low number renders at top
 
 	private float		alpha = 1.0f;		// texture's alpha value between 0 and 1
 
-	public int			fadeDir = 1;		// direction to fade: in = -1, out = 1
+	public int			fadeDir = -1;		// direction to fade: in = -1, out = 1
 
 
 

@@ -10,25 +10,27 @@ public class LoadLevelFading : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		StartCoroutine ("WaitBeforeLoadLevel");
-	
+		// if is the Splash scene, auto load to menu
+
+		if (Application.loadedLevelName == "splash"){
+			level = "title";
+			StartCoroutine ("WaitBeforeLoadLevel",level);
+		}
 	}
 
 	public void LoadLevel(string level){
-		Application.LoadLevel(level);
+		StartCoroutine ("WaitBeforeLoadLevel",level);
 	}
 
 
-	IEnumerator WaitBeforeLoadLevel(){
-
-		yield return new WaitForSeconds(2);
-		Application.LoadLevel(Application.loadedLevel+1);		// or the name of your level scene
-
-	}
 
 	IEnumerator WaitBeforeLoadLevel(string level){
-
-		yield return new WaitForSeconds(2);
+		if (Application.loadedLevelName == "splash"){
+			yield return new WaitForSeconds(2);
+		}
+		float fadeTime = Camera.main.GetComponent<Fading>().BeginFade(1);
+		yield return new WaitForSeconds(fadeTime+2);
+		//yield return new WaitForSeconds(2);
 		Application.LoadLevel(level);		// or the name of your level scene
 
 	}
