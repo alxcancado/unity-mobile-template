@@ -2,22 +2,38 @@
 using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour {
 
+	// General texts config
 	public string companyURL;
+	public string gameName;
+	private string shareText;
 
+	// for twitter sharing
+	public string twitterParamVia;
+	public string twitterParamRelated;
+	public string twitterParamHashtags;
+
+	// General audio/sfx files
+	public AudioMixer masterMixer;
 	public AudioClip companySFX;
 	public AudioClip setSFX;
 	public AudioClip cancelSFX;
 
-	public AudioMixer masterMixer;
-	private bool isOn = true;
-
+	// Button Sound config
+	private bool soundButtonIsPlaying = true;
 	public Button soundButton;
 	public Sprite soundButtonOn;
 	public Sprite soundButtonOff;
 
+	// Labels config
+	public Text score;
+
+	void Start(){
+		
+	}
 
 	public void OpenWebsite(){
 		float audioSize = companySFX.length;
@@ -26,17 +42,28 @@ public class GameManager : MonoBehaviour {
 		Application.OpenURL(companyURL);
 	}
 
-	/*
+
 	public void ShareTwitter(){
-		char[] charsToTrim = { 's', 'c', 'o', 'r', 'e', ' '};
+		// game score handling. read the playerprefs, trim the text (if you saved text together)
+		char[] charsToTrim = { 'B', 'e', 's', 't', ':',' '};
 		int points = int.Parse(score.text.TrimStart(charsToTrim));
-		string urlGame = "http://goo.gl/Xmj8Q5";
-		string allUrl = "https://twitter.com/intent/tweet?text=OmG%21%20NASA%20used%20this%20game%20to%20test%20my%20focus%20skills%21%20I%20got%20"+points+"%21%20%23Finding%23Pluto%20%40alxcancado%20&url="+urlGame;
+
+		// twitter share URL
+		shareText = "I'm playing "+gameName+" and got a new Hi-score: "+points;
+		string completeUrl = "https://twitter.com/share?url="+Uri.EscapeDataString(companyURL)
+			+"&text="+Uri.EscapeDataString(shareText)
+			+"&hashtags="+Uri.EscapeDataString(twitterParamHashtags)
+			//+"&via="+via // "&via=" parameter ads 3 chars; better use <space> (%20) + @ (%40), 1 char only hahah
+			+"%20%40"+Uri.EscapeDataString(twitterParamVia)
+			+"&related="+Uri.EscapeDataString(twitterParamRelated)
+			+"";
+
 		//Application.ExternalEval("window.open('"+urlGame+"','_blank')");
-		Application.OpenURL ("https://twitter.com/share?url="+"http%3A%2F%2Fgoo.gl%2FXmj8Q5"+"&text=OmG%21%20NASA%20used%20this%20game%20to%20test%20my%20focus%20skills%21%20I%20got%20"+"points"+"%21%20%23Finding%23Pluto%20&via=diygdev&related=alxcancado");
-		//https://twitter.com/share?url=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&via=twitterdev&related=twitterapi%2Ctwitter&hashtags=example%2Cdemo&text=custom%20share%20text
+		Application.OpenURL (completeUrl);
+		//Debug.Log(completeUrl);
+		//TEST URL: https://twitter.com/share?url=http%3A%2F%2Fgoo.gl%2FZ0XhGK&text=I%27m%20Playing%20GAME%20NAME%20and%20got%20a%20new%20Hi-score%3A%200000.&hashtags=diygamedev%2Cunity%2Cunity3d%20%40"diygamedev&related=alxcancado
 	}
-*/
+
 
 
 	public void PlaySFX( AudioClip audio){
@@ -54,15 +81,15 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void SetSoundOnOff(){
-		if(isOn){
+		if(soundButtonIsPlaying){
 			// mute mixer
 			masterMixer.SetFloat("VolumeMasterMixer",-80f);
-			isOn = !isOn;
+			soundButtonIsPlaying = !soundButtonIsPlaying;
 			soundButton.GetComponent<Image>().sprite = soundButtonOff;
 		} else {
 			// normal volume
 			masterMixer.SetFloat("VolumeMasterMixer",0f);
-			isOn = !isOn;
+			soundButtonIsPlaying = !soundButtonIsPlaying;
 			soundButton.GetComponent<Image>().sprite = soundButtonOn;
 		}
 	}
