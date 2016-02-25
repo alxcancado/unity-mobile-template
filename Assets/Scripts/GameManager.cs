@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour {
 	// Labels config
 	public Text score;
 
+	// Banner Animation
+	public Animator footBarMenu;
+	public Animator footBarBanner;
+
 	void Start(){
 		
 	}
@@ -93,6 +97,13 @@ public class GameManager : MonoBehaviour {
 			soundButton.GetComponent<Image>().sprite = soundButtonOn;
 		}
 	}
+
+	public void RotateFootBanner(){
+		// set conditions of these two animations. invert values every action
+		footBarMenu.SetBool("isHidden", !footBarMenu.GetBool("isHidden"));
+		footBarBanner.SetBool("isHidden", !footBarMenu.GetBool("isHidden"));
+	}
+
 	/*
 	<!-- Basic Share Links -->
 
